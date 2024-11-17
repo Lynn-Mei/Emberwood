@@ -1,3 +1,3 @@
 ﻿
-using var game = new Emberwood.Game1();
+using var game = Emberwood.Display.GameController.Instance.Game;
 game.Run();
