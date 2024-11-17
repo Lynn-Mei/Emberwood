@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Emberwood.Display;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -9,13 +10,13 @@ namespace Logic.Events
 {
     public class CameraMoveEventArgs : EventArgs
     {
-        public DataStrucutre.Vector Vector { get; private set; }
+        public Coordinate coordinate{ get; private set; }
 
         private CameraMoveEventArgs() { }
 
-        public CameraMoveEventArgs(DataStrucutre.Vector vector)
+        public CameraMoveEventArgs(Coordinate c)
         {
-            Vector = vector;
+            Coordinate coordinate = c;
         }
     }
 }

@@ -14,6 +14,9 @@ namespace Emberwood
         private SpriteBatch _spriteBatch;
         private GameData data;
 
+        private KeyboardState _currentKeyboardState;
+        private KeyboardState _previousKeyboardState;
+
         public EventHandler<CameraMoveEventArgs> MoveCameraEvent;
 
         public Game1()
@@ -44,7 +47,34 @@ namespace Emberwood
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            _currentKeyboardState = Keyboard.GetState();
 
+            //Example Camera move
+            Coordinate coordinate = new Coordinate(0, 0);
+
+            if (_currentKeyboardState.IsKeyDown(Keys.Up))
+            {
+                coordinate.Y -= 2;
+            }
+            if (_currentKeyboardState.IsKeyDown(Keys.Down))
+            {
+                coordinate.Y += 2;
+            }
+            if (_currentKeyboardState.IsKeyDown(Keys.Left))
+            {
+                coordinate.X -= 2;
+            }
+            if (_currentKeyboardState.IsKeyDown(Keys.Right))
+            {
+                coordinate.X += 2;
+            }
+
+            if (coordinate.X != 0 && coordinate.Y != 0)
+            {
+                MoveCameraEvent?.Invoke(this, new CameraMoveEventArgs(coordinate));
+            }
+
+            _previousKeyboardState = _currentKeyboardState;
 
             base.Update(gameTime);
         }
