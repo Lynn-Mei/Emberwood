@@ -13,11 +13,11 @@ namespace Emberwood.Environment.Ground
 {
     public class Ground: IElement
     {
-        private Earthbender earth;
+        private GroundGenerator earth;
         private List<Tile> tiles; 
 
         public Ground() { 
-            earth = new Earthbender();
+            earth = new GroundGenerator();
             earth.Generate("");
         }
 

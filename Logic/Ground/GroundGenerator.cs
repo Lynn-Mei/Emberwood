@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Logic.Ground
 {
-    public class Earthbender
+    public class GroundGenerator
     {
         private Hashmap<GroundID> land;
-        public Earthbender() { }
+        public GroundGenerator() { }
 
         public void Generate(string locationName)
         {
