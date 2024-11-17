@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Ground
 {
-    public enum GroundID
+    public enum TileTypeID
     {
         None = 0,
         Grass = 1,
