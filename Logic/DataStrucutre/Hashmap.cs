@@ -1,49 +1,58 @@
-﻿using System;
+﻿using Emberwood.Display;
+using Logic.Ground;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Logic.DataStrucutre
 {
-    public class Hashmap<T>
+    public abstract class Hashmap
     {
-        private List<List<T>> data;
+        protected int depth = 0;
+        protected Dictionary<Coordinate, TileData> data;
         public int Count => data.Count;
 
         public Hashmap(int depth) { 
-            data = new List<List<T>>();
-            for (int i = 0; i < depth; i++)
+            data = new Dictionary<Coordinate, TileData>();
+            this.depth = depth;
+        }
+
+        public TileData GetTile(Coordinate c)
+        {
+            TileData res = new VoidTile(c);
+            if (data.ContainsKey(c))
             {
-                data.Add(new List<T>());
+                res = data[c];
+            }
+            return res;
+        }
+
+        public void SetTile(Coordinate c, TileData t) {
+            if (data.ContainsKey(c))
+            {
+                data[c] = t;
+            }
+            else {
+                data.Add(c, t);
+            }   
+        }
+
+        public void EmptyTile(Coordinate c)
+        {
+            if (data.ContainsKey(c))
+            {
+                data[c] = new VoidTile(c);
+            }
+        }
+        public void ClearTile(Coordinate c) {
+            if (data.ContainsKey(c))
+            {
+                data.Remove(c);
             }
         }
 
-        public T Get(int vKey, int hKey)
-        {
-            return data[vKey][hKey];
-        }
-
-        public void AddRow() { 
-            data.Add(new List<T>());
-        }
-        public void RemoveRow() { 
-            data.Remove(data[data.Count]);
-        }
-
-        public void Set(T val, int vKey, int hKey)
-        {
-            data[vKey][hKey] = val;
-        }
-
-        public void Fill(T val)
-        {
-            for (int i = 0;i < data.Count;i++) { 
-                for (int j = 0;j < data[i].Count; j++)
-                {
-                    data[i][j] = val;
-                }
-            }
-        }
     }
 }
