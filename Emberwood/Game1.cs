@@ -1,9 +1,10 @@
 ﻿using Emberwood.Display;
-using Emberwood.Environment;
 using Logic;
+using Logic.Events;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Emberwood
 {
@@ -12,6 +13,8 @@ namespace Emberwood
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private GameData data;
+
+        public EventHandler<CameraMoveEventArgs> MoveCameraEvent;
 
         public Game1()
         {
@@ -24,6 +27,8 @@ namespace Emberwood
         {
             GameController.Instance.Game = this;
             data = new GameData();
+
+            MoveCameraEvent += data.MoveCamera;
 
             base.Initialize();
         }

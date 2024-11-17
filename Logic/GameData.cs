@@ -1,4 +1,5 @@
 ﻿using Emberwood.Display;
+using Logic.Events;
 using Logic.Ground;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,15 @@ namespace Logic
         private GroundData ground;
         private Camera camera;
 
-        
-
         public GameData()
         {
             this.ground = new GroundData(0000); 
             this.camera = new Camera();
+        }
+
+        public void MoveCamera(object sender, CameraMoveEventArgs e)
+        {
+
         }
     }
 }
